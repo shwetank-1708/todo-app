@@ -5,13 +5,13 @@ function App() {
   const [task, setTask] = useState("");
   const [tasks, setTasks] = useState<string[]>([]);
 
-  const manageTask = () => {
-    if (task.trim()) {
-      setTasks([...tasks, task]);
-      setTask(""); // Clear the input after adding
-    } else {
-      alert("Task cannot be empty!");
-    }
+  const addTask = () => {
+    setTasks((prevTasks) => {
+      const updatedTasks = [...prevTasks, task];
+      console.log(updatedTasks);
+      return updatedTasks;
+    });
+    setTask("");
   };
 
   return (
@@ -21,12 +21,12 @@ function App() {
         type="text"
         placeholder="Enter Your Task"
         value={task}
-        onChange={(e) => setTask(e.target.value)} // Update state on input change
+        onChange={(e) => setTask(e.target.value)}
       />
-      <button onClick={manageTask}>Add</button>
+      <button onClick={addTask}>Add</button>
       <ul>
-        {tasks.map((t, index) => (
-          <li key={index}>{t}</li>
+        {tasks.map((t) => (
+          <li>{t}</li>
         ))}
       </ul>
     </div>
