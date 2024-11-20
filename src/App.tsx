@@ -1,17 +1,56 @@
-import { useState } from "react";
+// import { useState } from "react";
+// import "./App.css";
+
+// function App() {
+//   const [task, setTask] = useState("");
+//   const [tasks, setTasks] = useState<string[]>([]);
+
+//   const addTask = () => {
+//     setTasks((prevTasks) => {
+//       const updatedTasks = [...prevTasks, task];
+//       console.log(updatedTasks);
+//       return updatedTasks;
+//     });
+//     setTask("");
+//   };
+
+//   return (
+//     <div>
+//       <h1>To Do App</h1>
+//       <input
+//         type="text"
+//         placeholder="Enter Your Task"
+//         value={task}
+//         onChange={(e) => setTask(e.target.value)}
+//       />
+//       <button onClick={addTask}>Add</button>
+//       <ul>
+//         {tasks.map((t) => (
+//           <li>{t}</li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// }
+
+// export default App;
+
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "./redux/store";
+import { addTask } from "./redux/slices/tasksSlice";
 import "./App.css";
 
 function App() {
   const [task, setTask] = useState("");
-  const [tasks, setTasks] = useState<string[]>([]);
+  const tasks = useSelector((state: RootState) => state.tasks.tasks);
+  const dispatch = useDispatch();
 
-  const addTask = () => {
-    setTasks((prevTasks) => {
-      const updatedTasks = [...prevTasks, task];
-      console.log(updatedTasks);
-      return updatedTasks;
-    });
-    setTask("");
+  const addTaskHandler = () => {
+    if (task.trim()) {
+      dispatch(addTask(task));
+      setTask("");
+    }
   };
 
   return (
@@ -23,10 +62,10 @@ function App() {
         value={task}
         onChange={(e) => setTask(e.target.value)}
       />
-      <button onClick={addTask}>Add</button>
+      <button onClick={addTaskHandler}>Add</button>
       <ul>
-        {tasks.map((t) => (
-          <li>{t}</li>
+        {tasks.map((t, index) => (
+          <li key={index}>{t}</li>
         ))}
       </ul>
     </div>
