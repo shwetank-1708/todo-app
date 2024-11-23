@@ -26,9 +26,9 @@ function App() {
     <div>
       <div className="flex flex-col justify-center items-center h-[100vh]">
         <h1 className="text-4xl font-bold m-4">To Do App</h1>
-        <div className="flex gap-2">
+        <div className="flex gap-2 m-4">
           <input
-            className="bg-gray-100 p-2 rounded-full"
+            className="bg-gray-100 p-2 rounded-full w-[400px]"
             type="text"
             placeholder="Enter Your Task"
             value={task}
@@ -45,10 +45,10 @@ function App() {
           {tasks.map((t, index) => (
             <li
               key={index}
-              className="flex items-center justify-around w-[500px] m-2 bg-gray-400"
+              className="flex items-center justify-between w-[500px] m-2"
             >
               <div className="flex items-center">
-                <TbPointFilled />
+                <TbPointFilled className="mx-2" />
                 {t}{" "}
               </div>
               <div>
